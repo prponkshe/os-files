@@ -8,6 +8,7 @@ let
     qtile = "qtile";
     nvim = "nvim";
     niri = "niri";
+    zed = "zed";
     # alacritty = "alacritty";
   };
 in
