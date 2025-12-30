@@ -9,7 +9,7 @@ let
     nvim = "nvim";
     niri = "niri";
     zed = "zed";
-    # alacritty = "alacritty";
+    alacritty = "alacritty";
   };
 in
 {
