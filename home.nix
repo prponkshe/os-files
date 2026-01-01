@@ -10,12 +10,14 @@ let
     niri = "niri";
     zed = "zed";
     alacritty = "alacritty";
+    backgrounds = "backgrounds";
+    i3 = "i3";
+    polybar = "polybar";
+    noctalia = "noctalia";
+    wezterm = "wezterm";
   };
 in
 {
-  home.username = "northee";
-  home.homeDirectory = "/home/northee";
-  
   programs.git = {
     enable = true;
     settings = {
@@ -34,10 +36,11 @@ in
     };
   };
 
-  home.stateVersion = "26.05";
-
   programs.bash = {
     enable = true;
+    shellAliases = {
+      nixos-update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/os-files#northee-dtp";
+    };
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {
@@ -55,5 +58,13 @@ in
     gcc
     gh
     fuzzel
+    brave
+    wezterm
+    clang-tools
   ];
+  
+  home.file.".bashrc.d".source = 
+    config.lib.file.mkOutOfStoreSymlink
+      "${dotfiles}/bashrc.d";
+
 }

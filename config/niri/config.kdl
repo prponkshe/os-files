@@ -271,7 +271,7 @@ layout {
 // spawn-at-startup "noctalia-shell"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-spawn-sh-at-startup "nix run github:nix-community/nixGL#nixGLIntel -- nix run github:noctalia-dev/noctalia-shell"
+spawn-sh-at-startup "noctalia-shell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
