@@ -25,7 +25,6 @@ in
       user.email = "prponkshe173@gmail.com";
       init.defaultBranch = "main";  
       pull.rebase = true;
-      credential.helper = "gh";
     };
   };
 
@@ -38,8 +37,18 @@ in
 
   programs.bash = {
     enable = true;
+    initExtra = ''
+    # Source ~/.bashrc.d/*
+    if [ -d "$HOME/.bashrc.d" ]; then
+      for rc in "$HOME"/.bashrc.d/*; do
+        [ -f "$rc" ] && . "$rc"
+      done
+    fi
+    unset rc
+  '';
     shellAliases = {
       nixos-update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/os-files#northee-dtp";
+      home-update = "nix run github:nix-community/home-manager/release-25.11 -- switch --flake ${config.home.homeDirectory}/os-files#work-ltp";
     };
   };
 
@@ -61,6 +70,17 @@ in
     brave
     wezterm
     clang-tools
+    htop
+    below
+    oxker
+    vlc
+    fd
+    bat
+    yazi
+    chafa
+    dive
+    doxygen
+    dunst
   ];
   
   home.file.".bashrc.d".source = 

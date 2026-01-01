@@ -32,18 +32,6 @@ alias bots='sshpass -p Nimda#321 ssh local@10.10.0.105'
 alias nolock='xset -dpms s off s noblank'
 alias catp='xclip -selection clipboard <'
 
-
-sudo() {
-  if [ "$1" = "-H" ]; then
-    shift
-    cmd="$1"
-    shift
-    command /usr/bin/sudo -H "$(command -v "$cmd")" "$@"
-  else
-    command /usr/bin/sudo "$@"
-  fi
-}
-
 mdrive() {
 	mkdir -p ~/ponkshedrive
 	local share="$1" # Share name
