@@ -62,8 +62,11 @@ in
     neovim
     ripgrep
     nil
+    luajitPackages.luarocks
     nixpkgs-fmt
     nodejs
+    sunshine
+    moonlight-qt
     gcc
     gh
     fuzzel
@@ -81,6 +84,8 @@ in
     dive
     doxygen
     dunst
+    rPackages.treesitter
+    zed-editor
   ];
   
   home.file.".bashrc.d".source = 

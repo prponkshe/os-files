@@ -103,6 +103,7 @@
                     "showCpuUsage": true,
                     "showDiskUsage": false,
                     "showGpuTemp": false,
+                    "showLoadAverage": false,
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
@@ -342,7 +343,7 @@
         "weatherShowEffects": true
     },
     "network": {
-        "wifiEnabled": true
+        "wifiEnabled": false
     },
     "nightLight": {
         "autoSchedule": true,
@@ -469,6 +470,7 @@
         "gpuCriticalThreshold": 90,
         "gpuPollingInterval": 3000,
         "gpuWarningThreshold": 80,
+        "loadAvgPollingInterval": 3000,
         "memCriticalThreshold": 90,
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
@@ -520,7 +522,7 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "directory": "/home/administrator/.config/backgrounds",
+        "directory": "/home/northee/.config/backgrounds",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",

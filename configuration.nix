@@ -4,12 +4,12 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ./system/options.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "northee-dtp"; # Define your hostname.
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Kolkata";
 
@@ -23,7 +23,6 @@
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
-    windowManager.qtile.enable = true; 
   };
 
   services.displayManager.ly.enable = true;
@@ -31,14 +30,27 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.northee = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
   };
 
-  programs.firefox.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
   programs.niri.enable = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";            # or "daily"
+    options = "--delete-older-than 14d";
+  };
+
+  # Optional but recommended: keep /boot from filling up by cleaning old boot entries
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -56,6 +68,16 @@
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  services.tailscale = {
+      enable = true;
+  };
+  services.sunshine = {
+  autoStart = true;
+  openFirewall = true;
+  capSysAdmin = true;
+  };
+
   
   system.stateVersion = "26.05";
 }
