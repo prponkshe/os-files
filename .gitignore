@@ -1,1 +1,4 @@
 **lock.json
+
+**/options.nix
+hardware-configuration.nix

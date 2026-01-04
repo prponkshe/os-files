@@ -84,10 +84,9 @@ in
     dive
     doxygen
     dunst
-    rPackages.treesitter
     zed-editor
   ];
-  
+
   home.file.".bashrc.d".source = 
     config.lib.file.mkOutOfStoreSymlink
       "${dotfiles}/bashrc.d";

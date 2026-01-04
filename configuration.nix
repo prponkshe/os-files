@@ -21,6 +21,9 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+    xkb = {
+        layout = "us";
+    };
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
   };
