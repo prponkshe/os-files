@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 
-let 
+let
   dotfiles = "${config.home.homeDirectory}/os-files/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
@@ -23,7 +23,7 @@ in
     settings = {
       user.name = "Pradyumna Ponkshe";
       user.email = "prponkshe173@gmail.com";
-      init.defaultBranch = "main";  
+      init.defaultBranch = "main";
       pull.rebase = true;
     };
   };
@@ -35,28 +35,34 @@ in
     };
   };
 
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   programs.bash = {
     enable = true;
     initExtra = ''
-    # Source ~/.bashrc.d/*
-    if [ -d "$HOME/.bashrc.d" ]; then
-      for rc in "$HOME"/.bashrc.d/*; do
-        [ -f "$rc" ] && . "$rc"
-      done
-    fi
-    unset rc
-  '';
+      # Source ~/.bashrc.d/*
+      if [ -d "$HOME/.bashrc.d" ]; then
+        for rc in "$HOME"/.bashrc.d/*; do
+          [ -f "$rc" ] && . "$rc"
+        done
+      fi
+      unset rc
+    '';
+
     shellAliases = {
       nixos-update = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/os-files#northee-dtp";
       home-update = "nix run github:nix-community/home-manager/release-25.11 -- switch --flake ${config.home.homeDirectory}/os-files#work-ltp";
     };
   };
 
-  xdg.configFile = builtins.mapAttrs (name: subpath: {
-    source = create_symlink "${dotfiles}/${subpath}";
-    recursive = true;
-  })
-  configs;
+  xdg.configFile = builtins.mapAttrs
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   home.packages = with pkgs; [
     neovim
@@ -69,6 +75,7 @@ in
     moonlight-qt
     gcc
     gh
+    google-cloud-sdk
     fuzzel
     brave
     wezterm
@@ -87,7 +94,7 @@ in
     zed-editor
   ];
 
-  home.file.".bashrc.d".source = 
+  home.file.".bashrc.d".source =
     config.lib.file.mkOutOfStoreSymlink
       "${dotfiles}/bashrc.d";
 
