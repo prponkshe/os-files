@@ -19,9 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
+  outputs = inputs@{ self, nixpkgs, nixgl, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -55,8 +56,11 @@
       };
       homeConfigurations.work-ltp = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = {
+          nixgl = nixgl;
+        };
         modules = [
-          ./home.nix
+          ./home-gl.nix
           ({ ... }: {
             home.username = "administrator";
             home.homeDirectory = "/home/administrator";

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, nixgl, pkgs, ... }:
 
 
 let
@@ -18,6 +18,12 @@ let
   };
 in
 {
+  targets.genericLinux.nixGL = {
+    packages = nixgl.packages;
+    defaultWrapper = "mesa";
+    installScripts = [ "mesa" ];
+  };
+
   programs.git = {
     enable = true;
     settings = {
@@ -65,20 +71,21 @@ in
     configs;
 
   home.packages = with pkgs; [
+    (config.lib.nixGL.wrap wezterm)
+    # (config.lib.nixGL.wrapOffload pkgs.freecad)
+    # (config.lib.nixGL.wrappers.nvidiaPrime pkgs.xonotic)
     neovim
     ripgrep
     nil
     luajitPackages.luarocks
     nixpkgs-fmt
     nodejs
-    sunshine
     moonlight-qt
     gcc
     gh
     google-cloud-sdk
     fuzzel
     brave
-    wezterm
     clang-tools
     htop
     below
@@ -91,7 +98,7 @@ in
     dive
     doxygen
     dunst
-    zed-editor
+    vulkan-tools
   ];
 
   home.file.".bashrc.d".source =

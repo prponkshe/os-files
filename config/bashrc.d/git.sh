@@ -1,9 +1,3 @@
-# parse_git_branch() {
-#   git rev-parse --is-inside-work-tree &>/dev/null || return
-#   branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-#   [ -n "$branch" ] && echo " ($branch)"
-# }
-#
 parse_git_branch() {
 	git rev-parse --is-inside-work-tree &>/dev/null || return
 

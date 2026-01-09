@@ -8,7 +8,7 @@ return {
     "JetBrains Mono",
     "Noto Color Emoji",
   }),
-  font_size = 12.0,
+  font_size = 13,
 
   -- Performance
   front_end = "WebGpu",
